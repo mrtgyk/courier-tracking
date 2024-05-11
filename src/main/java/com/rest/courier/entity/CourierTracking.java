@@ -32,6 +32,8 @@ public class CourierTracking {
     private Double latitude;
     @Column(name = "LONGITUDE")
     private Double longitude;
+    @Column(name = "DISTANCE")
+    private Integer distance;
 
     public void setId(Long id) {
         this.id = id;
@@ -71,5 +73,13 @@ public class CourierTracking {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Integer getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Integer distance) {
+        this.distance = distance;
     }
 }

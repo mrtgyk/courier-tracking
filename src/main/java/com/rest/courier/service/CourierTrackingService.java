@@ -25,23 +25,23 @@ public class CourierTrackingService {
     public void save(CourierTrackingRequestDTO courierTrackingRequestDTO) {
         List<Store> allStores = Store.getAllStores();
         for (Store store : allStores) {
-            if (isAvailableForSave(courierTrackingRequestDTO, store)) {
+            Float distance = distance(courierTrackingRequestDTO.getLatitude().floatValue(),
+                    courierTrackingRequestDTO.getLongitude().floatValue(),
+                    store.getLat().floatValue(),
+                    store.getLng().floatValue());
+
+            boolean isTimeLessThanOneMinute = isTimeLessThanOneMinute(courierTrackingRequestDTO.getCourier(),
+                    courierTrackingRequestDTO.getLatitude(),
+                    courierTrackingRequestDTO.getLongitude(),
+                    courierTrackingRequestDTO.getTime().getTime());
+
+            if (distance <= MAX_METERS && isTimeLessThanOneMinute) {
                 ObjectMapper mapper = new ObjectMapper();
                 CourierTracking courierTracking = mapper.convertValue(courierTrackingRequestDTO, CourierTracking.class);
+                courierTracking.setDistance(distance.intValue());
                 courierTrackingDao.save(courierTracking);
             }
         }
-    }
-
-    private boolean isAvailableForSave(CourierTrackingRequestDTO courierTrackingRequestDTO, Store store) {
-        float storeLatitude = store.getLat().floatValue();
-        float storeLongitude = store.getLng().floatValue();
-        Long requestCourier = courierTrackingRequestDTO.getCourier();
-        Long requestTime = courierTrackingRequestDTO.getTime().getTime();
-        Double requestLatitude = courierTrackingRequestDTO.getLatitude();
-        Double requestLongitude = courierTrackingRequestDTO.getLongitude();
-        float distance = distance(requestLatitude.floatValue(), requestLongitude.floatValue(), storeLatitude, storeLongitude);
-        return distance <= MAX_METERS && isTimeLessThanOneMinute(requestCourier, requestLatitude, requestLongitude, requestTime);
     }
 
     private boolean isTimeLessThanOneMinute(Long courier, Double latitude, Double longitude, Long requestTime) {
