@@ -5,18 +5,19 @@ import com.rest.courier.dto.CourierTrackingResponseDTO;
 import com.rest.courier.service.CourierTrackingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CourierController {
+public class CourierTrackingController {
 
     @Autowired
     private CourierTrackingService courierTrackingService;
 
     @PostMapping(value = "/courierTracking")
-    public ResponseEntity<CourierTrackingResponseDTO> courierTracking(@RequestBody CourierTrackingRequestDTO courierTrackingRequestDTO) {
+    public ResponseEntity<CourierTrackingResponseDTO> courierTracking(@RequestBody @Validated CourierTrackingRequestDTO courierTrackingRequestDTO) {
         courierTrackingService.save(courierTrackingRequestDTO);
         return ResponseEntity.ok().build();
     }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CourierTrackingDao extends JpaRepository<CourierTracking, Long> {
+    CourierTracking findFirstByCourierAndLatitudeAndLongitudeOrderByTimeDesc(Long courier, Double latitude, Double longitude);
 }

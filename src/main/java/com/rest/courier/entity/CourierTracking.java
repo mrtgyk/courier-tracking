@@ -24,14 +24,14 @@ public class CourierTracking {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date time;
     @Column(name = "COURIER")
-    private String courier;
+    private Long courier;
     @Column(name = "LATITUDE")
-    private Long latitude;
+    private Double latitude;
     @Column(name = "LONGITUDE")
-    private Long longitude;
+    private Double longitude;
 
     public void setId(Long id) {
         this.id = id;
@@ -49,27 +49,27 @@ public class CourierTracking {
         this.time = time;
     }
 
-    public String getCourier() {
+    public Long getCourier() {
         return courier;
     }
 
-    public void setCourier(String courier) {
+    public void setCourier(Long courier) {
         this.courier = courier;
     }
 
-    public Long getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }
