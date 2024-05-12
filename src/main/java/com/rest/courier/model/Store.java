@@ -2,12 +2,12 @@ package com.rest.courier.model;
 
 import java.util.List;
 
-public class Store {
-    private String name;
-    private Double lat;
-    private Double lng;
+public final class Store {
+    private final String name;
+    private final Double lat;
+    private final Double lng;
 
-    public Store(String name, double lat, double lng) {
+    public Store(String name, Double lat, Double lng) {
         this.name = name;
         this.lat = lat;
         this.lng = lng;
