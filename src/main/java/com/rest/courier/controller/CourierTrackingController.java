@@ -23,7 +23,7 @@ public class CourierTrackingController {
         try {
             courierTrackingService.save(courierTrackingRequestDTO);
         } catch (Exception e) {
-            log.error("Error while saving courier tracking", e);
+            log.error("Error while saving courier tracking. Exception: ", e);
             return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok("success");
