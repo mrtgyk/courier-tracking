@@ -5,12 +5,14 @@ import com.rest.courier.dao.CourierTrackingDao;
 import com.rest.courier.dto.CourierTrackingRequestDTO;
 import com.rest.courier.entity.CourierTracking;
 import com.rest.courier.model.Store;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class CourierTrackingService {
 
     private static final int MAX_METERS = 100;
@@ -41,6 +43,7 @@ public class CourierTrackingService {
                 CourierTracking courierTracking = mapper.convertValue(courierTrackingRequestDTO, CourierTracking.class);
                 courierTracking.setDistance((int) distance);
                 courierTrackingDao.save(courierTracking);
+                log.info("Courier Tracking saved. Courier: {}, Time: {}", courierTracking.getCourier(), courierTracking.getTime());
             }
         }
     }
