@@ -2,7 +2,7 @@ package com.rest.courier.model;
 
 import java.util.List;
 
-public final class Store {
+public class Store {
     private final String name;
     private final Double lat;
     private final Double lng;
